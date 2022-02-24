@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% block title %}{{title}}{% endblock %}
+{% block content %}
+    <div class = "container m-3">
+        <h4 class="text-info"><a href=""> จัดการข้อมูลโค </a> >> <a href="{{url_for("cow_heritage")}}"> ข้อมูลการผสมพันธุ์</a>  >> แก้ไขข้อมูลผสมพันธุ์ </h4>
+        <div class="card">
+            <div class="card-header">
+               
+            </div>
+            <div class="card-body">
+            <form action="{{url_for("updateHerigtage", id = her.id)}}" method="POST">
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="hb_date" class="form-label">วันที่ผสมพันธุ์</label>
+                        <input type="date" id = "hb_date" class="form-control" name="hb_date" value="{{her.hb_date}}">
+                      </div>
+                      <div class="form-group">
+
+                        <label for="cb_name" class="form-label">ชื่อพ่อพันธุ์</label>
+                            <select name="cb_name" class="form-select p-2" aria-label="Disabled select example">
+                                {% for breed in breeds %}
+                                {% if her.breeder.cb_name == breed.cb_name %}
+                                <option  selected value="{{breed.id}}">{{breed.cb_name}}</option>
+                                {% else %}
+                                <option value="{{breed.id}}">{{breed.cb_name}}</option>    
+                                {% endif %}
+                                {% endfor %}
+                              </select>
+                      </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for= "hb_cow" class="form-label">ชื่อแม่โค</label>
+                        <select name="hb_cow" class="form-select p-2" aria-label="Disabled select example">
+                          {% for cow in cows %}
+                          {% if her.cow.cow_name == cow.cow_name %}
+                          <option selected value="{{cow.id}}">{{cow.cow_name}}</option>
+                          {% else %}
+                          <option value="{{cow.id}}">{{cow.cow_name}}</option>
+                          {% endif %}
+                          {% endfor %}
+                            
+                          </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="hb_status" class="form-label">สถานะการผสมพันธุ์</label>
+                        <input type="text" id ="hb_status" class="form-control" name="hb_status", value="{{her.hb_status}}"">
+                      </div>
+                </div>
+                <div class="form-group">
+                    <label for="hb_remark" class="form-label">หมายเหตุ</label>
+                    <textarea type="text" id="hb_remark" class="form-control" name="hb_remark" >{{her.hb_remark}}</textarea>
+                </div>
+                <div class="form-group row justify-content-center">
+                    <button type="submit" class="btn btn-outline-info col-5 text-primary">เพิ่มข้อมูลการผสมพันธุ์</button>
+                    <a class="btn btn-outline-danger col-5 text-primary">ยกเลิก</a>
+                </div>
+            </div>
+        </form>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

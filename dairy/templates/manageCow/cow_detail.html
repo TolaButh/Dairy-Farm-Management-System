@@ -1,0 +1,192 @@
+{% extends 'layout.html' %}
+{% block title %}Manage Cow - {{title}}{% endblock %}
+{% block content %}
+
+    <div class="container mt-3">
+        <h4 class="text-info"><a href=""> จัดการข้อมูลโค </a> >> <a href="{{url_for("cow_milk")}}"> ข้อมูลทั่วไป </a> >> <a href="" >รายละเอียดชื่อโค</a> {{cow.cow_name}} </h4>
+        <div class="card">
+            <div class="card-header">
+                ข้อมูลทั่วไปของโค
+            </div>
+            <div class="card-body">
+               <div class="row">
+                <div class="col-4">
+                  <div class="">
+                    <label for="exampleFormControlInput1" class="form-label">หมายเลขโค</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="{{cow.cow_number}}">
+                  </div>
+                  <div class="">
+                    <label for="exampleFormControlInput1" class="form-label">ชื่อโค</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="{{cow.cow_name}}">
+                  </div>
+                  <div class="">
+                    <label for="exampleFormControlInput1" class="form-label">วันเกิด</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="{{cow.cow_birthday}}">
+                  </div>
+                  <div class="">
+                    <label for="exampleFormControlInput1" class="form-label">หมายเหตุ</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="{{cow.cow_remark}}">
+                  </div>
+                </div>
+                <div class="col-4">
+                    <div class="">
+                        <label for="exampleFormControlInput1" class="form-label">แม่โค</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="{{cow.mother_id}}">
+                      </div>
+                      <div class="">
+                        <label for="exampleFormControlInput1" class="form-label">พ่อโค</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1"  value="{{cow.breeder.cb_name}}">
+                      </div>
+                      <div class="">
+                        <label for="exampleFormControlInput1" class="form-label">เพศ</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="{{cow.cow_gender}}">
+                      </div>
+                      <div class="row mr-1 ml-1 mt-3 ">
+                        <a href="{{url_for("updateCow", id = cow.id)}}" class="btn btn-outline-warning mt-3 text-center">คลิกเพื่อแก้ไขข้อมูล</a>
+                      </div>
+                </div>
+                <div class="col-4 text-center">
+                    <img class="mt-3" src="{{url_for("static", filename="img/"+cow.cow_picture)}}" class="img-thumbnail" alt="..."  width="300" height="300">
+
+                </div>
+               </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header text-primary">
+                ประวัติการผสมพันธุ์
+            </div>
+
+            <div class="card-body">
+                <div class="card-title">
+                    <a href="" class="btn btn-outline-primary"><i class="bi bi-plus-circle-fill mr-1 bi-lg "></i>เพิ่มการผสมพันธุ์</a>
+                </div>
+                <table class="table table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">วันที่ผสมพันธุ์</th>
+                            <th scope="col">พ่อพันธู์</th>
+                            
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>21-03-2020</td>
+                            <td>Mark</td>
+                           
+                          </tr>
+                    </tbody>
+                    
+                </table>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header text-primary">
+                ประวัติการให้ลูก/คลอดลูก
+            </div>
+
+            <div class="card-body">
+                <div class="card-title">
+                    
+              
+                <table class="table table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">วันที่คลอดลูก</th>
+                            <th scope="col">ชื่อลูกโค</th>
+                            <th scope="col">เพศ</th>
+                            <th scope="col">ชื่อพ่อพันธุ์</th>
+                            
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            
+                            <td>23-01-2029</td>
+                            <td>baby01</td>
+                            <td>Female</td>
+                            <td>Prama</td>
+                           
+                          </tr>
+                    </tbody>
+                    
+                </table>
+            </div>
+
+            </div>
+        </div>
+
+
+        
+        <div class="card">
+            <div class="card-header text-primary">
+                ประวัติการรักษา
+            </div>
+
+            <div class="card-body">
+                <div class="card-title">
+                    <a href="" class="btn btn-outline-primary"><i class="bi bi-plus-circle-fill mr-1 bi-lg "></i>เพิ่มการรักษา</a>
+                </div>
+                <table class="table table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">วันที่รักษา</th>
+                            <th scope="col">ยาที่รักษา</th>
+                            <th scope="col">อาการป่วย</th>
+                            
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>21-03-2020</td>
+                            <td>ไม่รู้จัก</td>
+                            <td>อาการไม่รู้</td>
+                           
+                          </tr>
+                    </tbody>
+                    
+                </table>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header text-primary">
+                ประวัติการฉีดวัคซัน
+            </div>
+
+            <div class="card-body">
+                <div class="card-title">
+                    <a href="" class="btn btn-outline-primary"><i class="bi bi-plus-circle-fill mr-1 bi-lg "></i>เพิ่มการฉีดวัคซีน</a>
+                </div>
+                <table class="table table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">วันที่รักษา</th>
+                            <th scope="col">ชื่อวัคซีน</th>
+                            
+                            
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>21-03-2020</td>
+                            <td>ไม่รู้จัก</td>
+                        
+                           
+                          </tr>
+                    </tbody>
+                    
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

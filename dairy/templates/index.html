@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<h1> Hellow Dashboard</h1>
+     
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+  <script src="{{url_for("static", filename="js/Chart.min.js")}}"></script>
+  <script src="{{url_for("static", filename="js/Chart.extension.js")}}"></script>
+
+{% endblock javascripts %}

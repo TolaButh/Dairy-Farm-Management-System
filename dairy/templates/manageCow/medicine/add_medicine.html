@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block title %}{{title}}{% endblock %}
+{% block content %}
+    <div class = "container m-3">
+        <h4 class="text-info"><a href=""> จัดการข้อมูลโค </a> >> <a href=""> ข้อมูลการของยา</a> >> เพิ่มข้อมูลยารักษา </h4>
+        <div class="card">
+            <div class="card-header">
+               
+            </div>
+            <div class="card-body">
+            <form action="{{url_for("add_medicine")}}" method="POST">
+
+            <div class="row">
+               
+                    <div class="form-group">
+                        <label for="m_name" class="form-label">ชื่อยารักษา</label>
+                        <input type="text" id = "hb_date" class="form-control" name="m_name">
+                      </div>
+                      <div class="form-group">
+                        <label for="m_use" class="form-label">วิธีการใช้ยา</label>
+                        <textarea type="text" id = "hb_date" class="form-control" name="m_use"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="m_detail" class="form-label">รายละเอียดยา</label>
+                        <textarea type="text" id = "hb_date" class="form-control" name="m_detail"></textarea>
+                      </div>
+                <div class="form-group row justify-content-center">
+                    <button type="submit" class="btn btn-outline-info col-5 text-primary">เพิ่มข้อมูลการผสมพันธุ์</button>
+                    <a href="{{url_for("medicine")}}" class="btn btn-outline-danger col-5 text-primary">ยกเลิก</a>
+                </div>
+            </div>
+        </form>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

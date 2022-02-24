@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+{% block title %}Manage Cow - {{title}}{% endblock %}
+{% block content %}
+
+    <div class="container mt-3">
+        <h4 class="text-info"><a href=""> จัดการข้อมูลโค </a> >>  ข้อมูลพ่อพันธุ์ </a>  </h4>
+        <div class="card">
+            <div class="card-header">
+               
+                <a href="{{url_for("add_breed")}}" class="btn btn-outline-success"><i class="bi bi-cloud-plus text-primary mr-2"></i>เพื่อข้อมูลพ่อพันธุ์</a>
+   
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-9 justify-content-start">
+                     <div class="row justify-content-start">
+                      <form action="" method="post">
+                        {{formshow.hidden_tag()}}
+                        {{formshow.show.label(style="width: 3rem; height: 2rem;")}}
+                        {{formshow.show(style="width: 3rem; height: 2rem;")}}
+                       
+                      </form>
+                     </div>
+                       
+                    </div>
+                    <div class="col-3 ">
+                      <div class="row justify-content-end">
+                       
+                        <form action="" method ="post" class="justify-content-end">
+                            {{formsearch.hidden_tag()}}
+                            {{formsearch.search(style="width: 5rem; height: 2rem;")}}
+                            {{formsearch.submit(style="width: 5rem; height: 2rem;")}}
+                        </form>
+                       
+                      </div>    
+    
+                    </div>
+            </div>
+
+            <table class="table table-bordered mt-3">
+                <thead>
+                  <tr>
+                    <th>หมายเลขพ่อพันธุ์</th>
+                    <th>ชื่อพ่อพันธุ์</th>
+                    <th>สายพันธุ์</th>
+                    <th>แก้ไข</th>
+                    <th>ลบ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if breeds.items %}
+                    {% for breed in breeds.items %}
+                    <tr>
+                        <td>{{breed.cb_number}}</td>
+                        <td>{{breed.cb_name}}</td>
+                        <td>{{breed.cb_breed}}</td>
+                        <td>
+                            <a href="{{url_for("updateBreed", id = breed.id)}}" class="btn btn-outline btn-sm  bg-info"><i class="bi bi-pencil-square text-danger"></i></a>
+                        </td>
+                        <td>
+                            <a href="{{url_for("deleteBreed", id = breed.id)}}" class="btn btn-outline-danger btn-sm  bg-warning"><i class="bi bi-trash text-info"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                    {% else %}
+                        <tr>
+                            <td colspan="8" class="text-danger text-center">No Data</td>
+                        </tr>
+                    {% endif %}
+                   
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-lg-7  mt-3">
+                  <p>show <i>{{breeds.page}}</i> to <i>{{breeds.pages}}</i> of <i>{{breeds.pages}}</i> enties 
+
+                </div>
+                <div class="col-lg-5 justify-content-end">
+                 
+                  <a href="{{url_for("cow_breeder", page=breeds.prev_num)}}" class="btn btn-outline-success mb-4 btn-sm mt-4
+                  {% if breeds.page == 1 %}disabled{% endif %}
+                  ">
+                  Prevous
+                </a>
+               {% for page_num  in breeds.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+               
+               {% if page_num %}
+                  {% if breeds.page == page_num %}
+                     <a href="{{url_for("cow_breeder", page = page_num)}}" class="btn btn-success mt-4 mb-4 btn-sm">{{page_num}}</a>
+                  {% else %}
+                    <a href="{{url_for("cow_breeder", page = page_num)}}" class="btn btn-outline-success mt-4 mb-4 btn-sm">{{page_num}}</a>
+                  {% endif %}
+               {% else %}
+               ...
+               {% endif %}
+               {% endfor %}
+
+
+                <a href="{{url_for("cow_breeder", page=breeds.next_num)}}" class="btn btn-outline-success mb-4 btn-sm mt-4
+                {% if breeds.page == breeds.pages %}disabled{% endif %} ">
+                Next
+              </a>
+
+            
+                </div>
+               </div>
+               
+
+
+        </div>
+    </div>
+{% endblock %}

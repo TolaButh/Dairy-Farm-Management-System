@@ -1,0 +1,132 @@
+{% extends 'layout.html' %}
+{% block title %}Manage Cow - {{title}}{% endblock %}
+{% block content %}
+
+    <div class="container mt-3">
+
+        <h4 class="text-info"><a href=""> จัดการข้อมูลโค </a> >> <a href="{{url_for("cow_milk")}}"> ข้อมูลทั่วไป </a> >> <a href="{{url_for("detailCow",id= cow.id)}}" >รายละเอียดชื่อโค >> <a href="" >แก้ไขข้อมูลของโค</a>{{cow.cow_name}}  </h4>
+       
+        <div class="card">
+            <div class="card-header">
+              
+            </div>
+            <div class="card-body">
+                <form action="{{url_for("updateCow",id=cow.id)}}" method="POST" novalidate>
+                    {{form.hidden_tag()}}
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            {{form.cow_number.label(class="form-label")}}
+                          
+                            {% if form.cow_number.errors %}
+                                {{form.cow_number(class="form-control is-invalid")}}
+                                {% for error in form.cow_number.errors %}
+                                    <div class="invalid-feedback">
+                                        <span>{{error}}</span>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                            {{form.cow_number(class="form-control")}}
+                            {% endif %}
+                        </div>
+                        <div class="form-group col-lg-6">
+                            {{form.cow_name.label(class="form-label")}}
+                          
+                            {% if form.cow_name.errors %}
+                                {{form.cow_name(class="form-control is-invalid")}}
+                                {% for error in form.cow_name.errors %}
+                                    <div class="invalid-feedback">
+                                        <span>{{error}}</span>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                            {{form.cow_name(class="form-control")}}
+                            {% endif %}
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            {{form.cow_birthday.label(class="form-control-label")}}
+                            {{form.cow_birthday(class="form-control")}}
+                        </div>
+    
+    
+                        <div class="form-group col-lg-6">
+                            {{form.cow_gender.label(class="form-label")}}
+                            {{form.cow_gender(class="")}}
+                         
+                        </div>
+                    </div>
+    
+    
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            {{form.cow_picture.label(class="form-label")}}
+                            {{form.cow_picture(class="form-control")}}
+                          
+                        </div>
+                        <div class="form-group col-lg-6">
+                            {{form.cow_status.label(class="form-label")}}
+                            {{form.cow_status(class="")}}
+                      
+                        </div>
+                    </div>
+    
+    
+    
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            {{form.cow_mother.label(class="form-label")}}
+                          
+                            {% if form.cow_mother.errors %}
+                                {{form.cow_mother(class="form-control is-invalid")}}
+                                {% for error in form.cow_mother.errors %}
+                                    <div class="invalid-feedback">
+                                        <span>{{error}}</span>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                            {{form.cow_mother(class="form-control")}}
+                            {% endif %}
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="cb_name" class="form-label">ชื่อพ่อพันธุ์</label>
+                            <select name="cb_name" class="form-select p-2" aria-label="Disabled select example">
+                               
+                                {% for breed in breeds %}
+                                {% if breed.cb_name == cow.breeder.cb_name %}
+                                <option  selected value="{{breed.id}}">{{breed.cb_name}}</option>
+                                {% else %}
+                                <option value="{{breed.id}}">{{breed.cb_name}}</option>    
+                                {% endif %}
+                          
+                                {% endfor %}
+                              </select>
+                        </div>
+                    </div>
+    
+                    <div class="form-group">
+                        {{form.cow_remark.label(class="form-label")}}
+                      
+                        {% if form.cow_remark.errors %}
+                            {{form.cow_remark(class="form-control is-invalid")}}
+                            {% for error in form.cow_remark.errors %}
+                                <div class="invalid-feedback">
+                                    <span>{{error}}</span>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                        {{form.cow_remark(class="form-control")}}
+                        {% endif %}
+                    </div>
+    
+                    <div class="form-group">
+                        {{form.submit(class="btn btn-outline-info")}}
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

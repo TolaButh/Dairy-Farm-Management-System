@@ -1,0 +1,112 @@
+{% extends 'layout.html' %}
+{% block title %}{{title}}{% endblock %}
+{% block content %}
+    <div class = "container mt-3">
+        <h4 class="text-info"><a href=""> จัดการข้อมูลโค </a> >> <a href="#"> ข้อมูลของยารักษา </h4>
+        <div class="card">
+            <div class="card-header">
+                <a href="{{url_for("add_medicine")}}" class="btn btn-outline-info text-primary"><i class="bi bi-cloud-plus-fill mr-2 "></i>เพิ่มข้อมูลยารักษา</a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-9 justify-content-start">
+                     <div class="row justify-content-start">
+                      <form action="" method="post">
+                        {{formshow.hidden_tag()}}
+                        {{formshow.show.label(style="width: 3rem; height: 2rem;")}}
+                        {{formshow.show(style="width: 3rem; height: 2rem;")}}
+                      </form>
+                     </div>
+                    </div>
+                    <div class="col-3 ">
+                      <div class="row justify-content-end">
+                        <form action="" method ="post" class="justify-content-end">
+                            {{formsearch.hidden_tag()}}
+                            {{formsearch.search(style="width: 7rem; height: 2rem;")}}
+                            {{formsearch.submit(style="width: 5rem; height: 2rem;")}}
+                        </form>
+                      </div>   
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">ชื่อยา</th>
+                            <th scope="col">วิธีการใช้</th>
+                            <th scope="col">รายละเอียดยา</th>
+                            <th scope="col">แก้ไข</th>
+                            <th scope="col">ลบ</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% if meds.items %}
+                          
+                          {% for med in meds.items %}
+                          <tr>
+                            <td>{{med.m_name}}</td>
+                            <td>{{med.m_use}}</td>
+                            <td>{{med.m_detail}}</td>
+                            <td>
+                                <a href="{{url_for("updateMedicine", id = med.id)}}" class="btn btn-outline bg-info text-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            </td>
+                            <td>
+                                <a href="{{url_for("deleteMedicine", id = med.id)}}" class="btn btn-outline bg-warning text-primary btn-sm"><i class="bi bi-trash"></i></a>    
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        
+                          {% else %}
+                          <tr>
+                            <td colspan="5" class="text-blue text-center">No Data</td>
+                          </tr>
+
+                          {% endif %}
+                         
+                        </tbody>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-lg-7  mt-3">
+                          <p>show <i>{{meds.page}}</i> to <i>{{meds.pages}}</i> of <i>{{meds.pages}}</i> enties 
+        
+                        </div>
+                        <div class="col-lg-5 justify-content-end">
+                         
+                          <a href="{{url_for("medicine", page=meds.prev_num)}}" class="btn btn-outline-success mb-4 btn-sm mt-4
+                          {% if meds.page == 1 %}disabled{% endif %}
+                          ">
+                          Prevous
+                        </a>
+                       {% for page_num  in meds.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                       
+                       {% if page_num %}
+                          {% if meds.page == page_num %}
+                             <a href="{{url_for("medicine", page = page_num)}}" class="btn btn-success mt-4 mb-4 btn-sm">{{page_num}}</a>
+                          {% else %}
+                            <a href="{{url_for("medicine", page = page_num)}}" class="btn btn-outline-success mt-4 mb-4 btn-sm">{{page_num}}</a>
+                          {% endif %}
+                       {% else %}
+                       ...
+                       {% endif %}
+                       {% endfor %}
+        
+        
+                        <a href="{{url_for("medicine", page=meds.next_num)}}" class="btn btn-outline-success mb-4 btn-sm mt-4
+                        {% if meds.page == meds.pages %}disabled{% endif %} ">
+                        Next
+                      </a>
+        
+                    
+                        </div>
+                       </div>
+                           
+
+
+
+
+
+
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+{% block title %}{{title}}{% endblock %}
+{% block content %}
+    <div class = "container m-3">
+        <h4 class="text-info"><a href="{{url_for("remedy")}}"> จัดการข้อมูลของการรักษา</a> >> <a href="" >แก้ไขข้อมูลการรักษา</a></h4>
+        <div class="card">
+            <div class="card-header">
+               
+            </div>
+            <div class="card-body">
+                <form action="{{url_for("updateRemedy", id = rem.id)}}" method="POST">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="r_date" class="form-label">วันที่รักษา</label>
+                                <input type="date" id = "r_date" class="form-control" name="r_date" value={{rem.r_date}} >
+                              </div>
+                              <div class="form-group">
+                                <label for="cow_id" class="form-label">ชื่อโคที่รักษา</label>
+                                <select name="cow_id" class="form-select" aria-label="Disabled select example">
+                                  
+                                    {% for cow in cows %}
+                                    {% if rem.cow.cow_name == cow.cow_name %}
+                                    <option value="{{cow.id}}">{{cow.cow_name}}</option>
+                                    {% else %}{% endif %}
+                                    <option value="{{cow.id}}">{{cow.cow_name}}</option>
+                                    {% endfor %}
+                                  </select>
+                              </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for= "m_id" class="form-label">ชื่อยาที่รักษา</label>
+                                <select name="m_id" class="form-select p-2" aria-label="Disabled select example">
+                                   
+                                   {% for medicine in medicines %}
+                                   {% if rem.medicine.m_name %}
+                                   <option value="{{medicine.id}}">{{medicine.m_name}}</option>
+                                   {% else %}
+                                   <option value="{{medicine.id}}">{{medicine.m_name}}</option>
+                                   {% endif %}
+                                   
+                                   {% endfor %}
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                <label for="r_description" class="form-label">รายละเอียดอาการ</label>
+                                <textarea type="text" id ="r_description" class="form-control p-2" name="r_description">{{rem.r_description}}</textarea>
+                              </div>
+                        </div>
+                       
+                        <div class="form-group row justify-content-center">
+                            <button type="submit" class="btn btn-outline-info col-5 text-primary">เพิ่มข้อมูลการรักษา</button>
+                            <a href="{{url_for("remedy")}}" class="btn btn-outline-danger col-5 text-primary">ยกเลิก</a>
+                        </div>
+                    </div>
+                </form>
+        
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

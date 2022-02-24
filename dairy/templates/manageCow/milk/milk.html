@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+{% block title %}Manage Cow - {{title}}{% endblock %}
+{% block content %}
+
+    <div class="container mt-3">
+        <h4 class="text-info">ข้อมูลน้ำนม</h4>
+      
+            <div class="card p-4">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-2 justify-content-start">
+                            <a class="btn btn-outline-info " href="">เพิ่มข้อมูลน้ำนม</a> 
+                           
+                        </div>
+                        <div class="col-10">
+                           <div class="row">
+                            <h5 class="col-2">สถานะที่ต้องค้นหา</h5>
+                            <select class="form-select col-3" aria-label="Default select example">
+                                <option selected>เลือกสถานะโค</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                              </select>
+                              <h4 class="col-1">เพศ</h4>
+                              <select class="form-select col-3" aria-label="Default select example">
+                                <option selected>เลือกเพศ</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                              </select>
+                              <a class=" text-wrap badge badge-danger btn btn-outline-info ml-5 text-success"  style="width: 4rem;">ค้นหา</a>
+                              
+                           </div>
+        
+                        </div>
+                   
+                </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-9 justify-content-start">
+                         <div class="row justify-content-start">
+                          <form action="" method="post">
+                            {{form.hidden_tag()}}
+                            {{form.show.label(style="width: 3rem; height: 2rem;")}}
+                            {{form.show(style="width: 3rem; height: 2rem;")}}
+                            
+                          </form>
+                         </div>
+                           
+                        </div>
+                        <div class="col-3 ">
+                          <div class="row justify-content-end">
+                           
+                            <form action="" method ="post" class="justify-content-end">
+                                {{formsearch.hidden_tag()}}
+                                {{formsearch.search(style="width: 5rem; height: 2rem;")}}
+                                {{formsearch.submit(style="width: 5rem; height: 2rem;")}}
+                            </form>
+                           
+                          </div>    
+        
+                        </div>
+                </div>
+
+                <table class="table table-bordered mt-3">
+                    <thead>
+                      <tr>
+                        <th>วันที่</th>
+                        <th>โคที่ได้นม:ตัว</th>
+                        <th>น้ำนมรอบเช้า:กก</th>
+                        <th>น้ำนมรอบบ่าย:กก</th>
+                        <th>จำนวนน้ำนมทั้งหมด:กก</th>
+                        <th>น้ำนมเฉลี่ยต่อตัว:กก</th>
+                        
+                        <th>แก้ไข</th>
+                        <th>ลบ</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <th>2021-20-01</th>
+                        <td>10</td>
+                        <td>20</td>
+                        <td>209</td>
+                        <td>23</td>
+                        <td>45</td>
+                        <td>
+                            <a href="" class="btn btn-outline-success btn-sm">ดูข้อมูลโค</a>
+                        </td>
+                        <td><a href="" class="btn btn-outline-danger btn-sm">ลบ</a></td>
+                      
+                      </tr>
+                     
+                      
+                    </tbody>
+                  </table>
+               
+                 
+
+            </div>
+    </div>
+
+{% endblock  %}
